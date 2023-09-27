@@ -6,7 +6,7 @@ document.getElementById('product-form').addEventListener('submit', async functio
     const price = document.getElementById('price').value;
     const sold = document.getElementById('sold').value === "true";
   
-    const response = await fetch('http://thawing-journey-41823.herokuapp.com/add-item', {
+    const response = await fetch('https://git.heroku.com/thawing-journey-41823.git/add-item', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ name, quantity, price, sold })
@@ -18,7 +18,7 @@ document.getElementById('product-form').addEventListener('submit', async functio
   });
   
   async function loadProducts() {
-    const response = await fetch('http://thawing-journey-41823.herokuapp.com/get-items');
+    const response = await fetch('https://git.heroku.com/thawing-journey-41823.git/get-items');
     const products = await response.json();
     const tbody = document.querySelector("#product-table tbody");
     tbody.innerHTML = "";
@@ -44,13 +44,13 @@ document.getElementById('product-form').addEventListener('submit', async functio
   }
   
   async function deleteProduct(productId) {
-    await fetch(`http://thawing-journey-41823.herokuapp.com/delete-item/${productId}`, {method: 'DELETE'});
+    await fetch(`https://git.heroku.com/thawing-journey-41823.git/${productId}`, {method: 'DELETE'});
     loadProducts(); // Reload products after deletion
   }
   
   async function editProduct(productId) {
     const newName = prompt('Enter new product name:');
-    await fetch(`http://thawing-journey-41823.herokuapp.com/edit-item/${productId}`, {
+    await fetch(`https://git.heroku.com/thawing-journey-41823.git/${productId}`, {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({name: newName})
