@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Record</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Skull Rush</title>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Enter Product Details</h1>
-        <form id="productForm">
-            <input type="text" placeholder="Product Name" id="productName" required>
-            <input type="number" placeholder="Quantity" id="quantity" required>
-            <input type="number" placeholder="Price Sold" id="price" step="0.01" required>
-            <label for="paid">Paid?</label>
-            <input type="checkbox" id="paid">
-            <button type="submit">Add Product</button>
-        </form>
-        <h2>Product List</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Price Sold</th>
-                    <th>Paid?</th>
-                </tr>
-            </thead>
-            <tbody id="productList"></tbody>
-        </table>
-    </div>
-    <script src="save.js"></script>
+  <form id="product-form">
+    <input type="text" id="name" placeholder="Producto" required>
+    <input type="number" id="quantity" placeholder="Cantidad" required>
+    <input type="number" id="price" placeholder="Precio" required>
+    <select id="sold" required>
+      <option value="true">Pagado</option>
+      <option value="false">No pagado</option>
+    </select>
+    <button type="submit">Guardar</button>
+  </form>
+  <table id="product-table">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>CAntidad</th>
+        <th>Precio</th>
+        <th>Pagado</th>
+        <th>Accion</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <script src="script.js"></script>
 </body>
+
 </html>

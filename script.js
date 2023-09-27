@@ -1,91 +1,64 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('productForm');
-    const productList = document.getElementById('productList');
-
-    function loadProducts() {
-        fetch('http://thawing-journey-41823.herokuapp.com/products')
-            .then(response => response.json())
-            .then(data => {
-                productList.innerHTML = '';  // Clear the list first
-                data.forEach(product => addProductToTable(product));
-            });
-    }
-
-    loadProducts();
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const product = {
-            name: document.getElementById('productName').value,
-            quantity: document.getElementById('quantity').value,
-            price: document.getElementById('price').value,
-            paid: document.getElementById('paid').checked
-        };
-
-        if (form.getAttribute('data-editing')) {
-            updateProduct(form.getAttribute('data-editing'), product);
-        } else {
-            addProduct(product);
-        }
+document.getElementById('product-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+  
+    const name = document.getElementById('name').value;
+    const quantity = document.getElementById('quantity').value;
+    const price = document.getElementById('price').value;
+    const sold = document.getElementById('sold').value === "true";
+  
+    const response = await fetch('http://thawing-journey-41823.herokuapp.com/add-item', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ name, quantity, price, sold })
     });
-
-    productList.addEventListener('click', function(e) {
-        if (e.target && e.target.classList.contains('edit-btn')) {
-            const productId = e.target.getAttribute('data-id');
-            fetch(`http://thawing-journey-41823.herokuapp.com/products/${productId}`)
-                .then(response => response.json())
-                .then(product => {
-                    document.getElementById('productName').value = product.name;
-                    document.getElementById('quantity').value = product.quantity;
-                    document.getElementById('price').value = product.price;
-                    document.getElementById('paid').checked = product.paid;
-
-                    form.setAttribute('data-editing', productId);
-                });
-        }
+  
+    const result = await response.json();
+    console.log(result);
+    loadProducts(); // Reload products after adding a new one
+  });
+  
+  async function loadProducts() {
+    const response = await fetch('http://thawing-journey-41823.herokuapp.com/get-items');
+    const products = await response.json();
+    const tbody = document.querySelector("#product-table tbody");
+    tbody.innerHTML = "";
+  
+    products.forEach(product => {
+      const row = tbody.insertRow();
+      row.insertCell().textContent = product.name;
+      row.insertCell().textContent = product.quantity;
+      row.insertCell().textContent = product.price;
+      row.insertCell().textContent = product.sold ? "Yes" : "No";
+  
+      const actionsCell = row.insertCell();
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.onclick = function() { deleteProduct(product._id); };
+      actionsCell.appendChild(deleteButton);
+  
+      const editButton = document.createElement('button');
+      editButton.textContent = 'Edit';
+      editButton.onclick = function() { editProduct(product._id); };
+      actionsCell.appendChild(editButton);
     });
-
-    function addProductToTable(product) {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${product.name}</td>
-            <td>${product.quantity}</td>
-            <td>${product.price}</td>
-            <td>${product.paid ? 'Yes' : 'No'}</td>
-            <td><button class="edit-btn" data-id="${product._id}">Edit</button></td>
-        `;
-        productList.appendChild(row);
-    }
-
-    function addProduct(product) {
-        fetch('http://thawing-journey-41823.herokuapp.com/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(product),
-        })
-        .then(response => response.json())
-        .then(() => {
-            form.reset();
-            loadProducts();
-        });
-    }
-
-    function updateProduct(productId, updatedProduct) {
-        fetch(`http://thawing-journey-41823.herokuapp.com/update/${productId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedProduct),
-        })
-        .then(response => response.json())
-        .then(() => {
-            form.reset();
-            form.removeAttribute('data-editing');
-            loadProducts();
-        });
-    }
-});
+  }
+  
+  async function deleteProduct(productId) {
+    await fetch(`http://thawing-journey-41823.herokuapp.com/delete-item/${productId}`, {method: 'DELETE'});
+    loadProducts(); // Reload products after deletion
+  }
+  
+  async function editProduct(productId) {
+    const newName = prompt('Enter new product name:');
+    await fetch(`http://thawing-journey-41823.herokuapp.com/edit-item/${productId}`, {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({name: newName})
+    });
+    loadProducts(); // Reload products after editing
+  }
+  
+  // Load products on initial page load
+  loadProducts();
+  
+  
