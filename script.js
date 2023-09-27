@@ -1,77 +1,91 @@
-document.getElementById('itemForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('productForm');
+    const productList = document.getElementById('productList');
 
-    const form = document.getElementById('itemForm');
-    
-    // Check if we are in edit mode
-    if(form.dataset.isEdit) {
-        // Update the existing item
-        updateItem(form.dataset.rowIndex);
-    } else {
-        // Add new item
-        addItem();
+    function loadProducts() {
+        fetch('http://thawing-journey-41823.herokuapp.com/products')
+            .then(response => response.json())
+            .then(data => {
+                productList.innerHTML = '';  // Clear the list first
+                data.forEach(product => addProductToTable(product));
+            });
     }
-    
-    // Clear form
-    form.reset();
-    form.dataset.isEdit = '';
-    form.dataset.rowIndex = '';
+
+    loadProducts();
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const product = {
+            name: document.getElementById('productName').value,
+            quantity: document.getElementById('quantity').value,
+            price: document.getElementById('price').value,
+            paid: document.getElementById('paid').checked
+        };
+
+        if (form.getAttribute('data-editing')) {
+            updateProduct(form.getAttribute('data-editing'), product);
+        } else {
+            addProduct(product);
+        }
+    });
+
+    productList.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('edit-btn')) {
+            const productId = e.target.getAttribute('data-id');
+            fetch(`http://thawing-journey-41823.herokuapp.com/products/${productId}`)
+                .then(response => response.json())
+                .then(product => {
+                    document.getElementById('productName').value = product.name;
+                    document.getElementById('quantity').value = product.quantity;
+                    document.getElementById('price').value = product.price;
+                    document.getElementById('paid').checked = product.paid;
+
+                    form.setAttribute('data-editing', productId);
+                });
+        }
+    });
+
+    function addProductToTable(product) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${product.name}</td>
+            <td>${product.quantity}</td>
+            <td>${product.price}</td>
+            <td>${product.paid ? 'Yes' : 'No'}</td>
+            <td><button class="edit-btn" data-id="${product._id}">Edit</button></td>
+        `;
+        productList.appendChild(row);
+    }
+
+    function addProduct(product) {
+        fetch('http://thawing-journey-41823.herokuapp.com/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(product),
+        })
+        .then(response => response.json())
+        .then(() => {
+            form.reset();
+            loadProducts();
+        });
+    }
+
+    function updateProduct(productId, updatedProduct) {
+        fetch(`http://thawing-journey-41823.herokuapp.com/update/${productId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedProduct),
+        })
+        .then(response => response.json())
+        .then(() => {
+            form.reset();
+            form.removeAttribute('data-editing');
+            loadProducts();
+        });
+    }
 });
-
-function addItem() {
-    // Get values
-    const itemName = document.getElementById('itemName').value;
-    const itemQuantity = document.getElementById('itemQuantity').value;
-    const itemPrice = document.getElementById('itemPrice').value;
-    const itemPaid = document.getElementById('itemPaid').checked;
-
-    // Add to table
-    const row = document.createElement('tr');
-    row.innerHTML = createRowHTML(itemName, itemQuantity, itemPrice, itemPaid);
-    document.querySelector('#itemList tbody').appendChild(row);
-}
-
-function createRowHTML(itemName, itemQuantity, itemPrice, itemPaid) {
-    return `
-        <td>${itemName}</td>
-        <td>${itemQuantity}</td>
-        <td>${itemPrice}</td>
-        <td>${itemPaid ? 'Yes' : 'No'}</td>
-        <td>
-            <button onclick="editItem(this)">Edit</button>
-            <button onclick="removeItem(this)">Remove</button>
-        </td>
-    `;
-}
-
-function removeItem(button) {
-    button.parentElement.parentElement.remove();
-}
-
-function editItem(button) {
-    const row = button.parentElement.parentElement;
-    const columns = row.children;
-
-    // Populate form with item data
-    document.getElementById('itemName').value = columns[0].textContent;
-    document.getElementById('itemQuantity').value = columns[1].textContent;
-    document.getElementById('itemPrice').value = columns[2].textContent;
-    document.getElementById('itemPaid').checked = columns[3].textContent === 'Yes';
-
-    // Set the form to edit mode
-    const form = document.getElementById('itemForm');
-    form.dataset.isEdit = 'true';
-    form.dataset.rowIndex = Array.from(row.parentElement.children).indexOf(row);
-}
-
-function updateItem(rowIndex) {
-    // Get the updated values from form
-    const itemName = document.getElementById('itemName').value;
-    const itemQuantity = document.getElementById('itemQuantity').value;
-    const itemPrice = document.getElementById('itemPrice').value;
-    const itemPaid = document.getElementById('itemPaid').checked;
-
-    // Get the row to be updated and set the new values
-    const row = document.querySelector('#itemList tbody').children[rowIndex];
-    row.innerHTML = createRowHTML(itemName, itemQuantity, itemPrice, itemPaid);
-}

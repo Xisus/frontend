@@ -3,32 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Website</title>
+    <title>Product Record</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="app">
-        <h1>Product List</h1>
-        <form id="itemForm">
-            <input type="text" id="itemName" placeholder="Product Name" required>
-            <input type="number" id="itemQuantity" placeholder="Quantity" required>
-            <input type="number" id="itemPrice" placeholder="Price" required>
-            <input type="checkbox" id="itemPaid"> Paid
+    <div class="container">
+        <h1>Enter Product Details</h1>
+        <form id="productForm">
+            <input type="text" placeholder="Product Name" id="productName" required>
+            <input type="number" placeholder="Quantity" id="quantity" required>
+            <input type="number" placeholder="Price Sold" id="price" step="0.01" required>
+            <label for="paid">Paid?</label>
+            <input type="checkbox" id="paid">
             <button type="submit">Add Product</button>
         </form>
-        <table id="itemList">
+        <h2>Product List</h2>
+        <table>
             <thead>
                 <tr>
-                    <th>Product</th>
+                    <th>Product Name</th>
                     <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Paid</th>
-                    <th>Actions</th>
+                    <th>Price Sold</th>
+                    <th>Paid?</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="productList"></tbody>
         </table>
     </div>
-    <script src="script.js"></script>
+    <script src="save.js"></script>
 </body>
 </html>
