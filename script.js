@@ -5,7 +5,7 @@ async function addProduct() {
     const sold = document.getElementById('sold').value === "true";
 
     try {
-        const response = await fetch('https://git.heroku.com/thawing-journey-41823.git/add-item', {
+        const response = await fetch('https://git.heroku.com/skull-rush.git/add-item', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ name, quantity, price, sold })
@@ -21,7 +21,7 @@ async function addProduct() {
 
 async function loadProducts() {
     try {
-        const response = await fetch('https://git.heroku.com/thawing-journey-41823.git/get-items');
+        const response = await fetch('https://git.heroku.com/skull-rush.git/get-items');
         const products = await response.json();
         const tbody = document.querySelector("#product-table tbody");
         tbody.innerHTML = "";
@@ -51,7 +51,7 @@ async function loadProducts() {
 
 async function deleteProduct(productId) {
     try {
-        await fetch(`https://git.heroku.com/thawing-journey-41823.git/delete-item/${productId}`, {method: 'DELETE'});
+        await fetch(`https://git.heroku.com/skull-rush.git/delete-item/${productId}`, {method: 'DELETE'});
         loadProducts(); // Reload products after deletion
     } catch (error) {
         console.error('Error during fetch operation: ', error);
@@ -61,7 +61,7 @@ async function deleteProduct(productId) {
 async function editProduct(productId) {
     const newName = prompt('Enter new product name:');
     try {
-        await fetch(`https://git.heroku.com/thawing-journey-41823.git/edit-item/${productId}`, {
+        await fetch(`https://git.heroku.com/skull-rush.git/edit-item/${productId}`, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({name: newName})
