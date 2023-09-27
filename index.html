@@ -2,36 +2,36 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Skull Rush</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Product Tracker</title>
 </head>
 
 <body>
-  <form id="product-form">
-    <input type="text" id="name" placeholder="Producto" required>
-    <input type="number" id="quantity" placeholder="Cantidad" required>
-    <input type="number" id="price" placeholder="Precio" required>
-    <select id="sold" required>
-      <option value="true">Pagado</option>
-      <option value="false">No pagado</option>
-    </select>
-    <button type="submit">Guardar</button>
-  </form>
-  <table id="product-table">
-    <thead>
-      <tr>
-        <th>Producto</th>
-        <th>CAntidad</th>
-        <th>Precio</th>
-        <th>Pagado</th>
-        <th>Accion</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-  <script src="script.js"></script>
+    <form id="product-form">
+        <input type="text" id="name" placeholder="Product Name" required>
+        <input type="number" id="quantity" placeholder="Quantity" required>
+        <input type="number" id="price" placeholder="Price" required>
+        <select id="sold" required>
+            <option value="true">Sold</option>
+            <option value="false">Not Sold</option>
+        </select>
+        <button type="button" onclick="addProduct()">Add Product</button>
+    </form>
+    <table id="product-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Sold</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script src="script.js"></script>
 </body>
 
 </html>
