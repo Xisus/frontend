@@ -1,7 +1,7 @@
 .main_structure {
     font-family: Arial, sans-serif; 
     max-width: fit-content;
-    margin: auto;
+    margin: 20px;
     margin-top: 20px;
   }
   
@@ -10,7 +10,8 @@ form {
 }
   
 .product_style {
-    width: 100px;
+    width: 152px;
+    margin-bottom: 5px;
 }
 .quantity_style {
     width: 70px;
@@ -19,11 +20,10 @@ form {
     width: 70px;
 }
 
-input
-select,
 button {
     margin: 5px;
     padding: 5px;
+    font-size: smaller;
 }
   
 table {
@@ -34,6 +34,7 @@ table {
 th, td {
     padding: 8px 12px;
     border: 1px solid #ddd;
+    font-size: x-small;
 }
   
 button {

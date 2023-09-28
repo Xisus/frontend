@@ -42,10 +42,10 @@ async function loadProducts() {
             deleteButton.onclick = function() { deleteProduct(product._id); };
             actionsCell.appendChild(deleteButton);
 
-            const editButton = document.createElement('button');
+            /*const editButton = document.createElement('button');
             editButton.textContent = 'Editar';
             editButton.onclick = function() { editProduct(product._id); };
-            actionsCell.appendChild(editButton);
+            actionsCell.appendChild(editButton);*/
         });
     } catch (error) {
         console.error('Error during fetch operation: ', error);
@@ -53,13 +53,22 @@ async function loadProducts() {
 }
 
 async function deleteProduct(productId) {
-    try {
-        await fetch(`https://skull-rush-88e0ddb4adf5.herokuapp.com/delete-item/${productId}`, {method: 'DELETE'});
-        loadProducts(); // Reload products after deletion
-    } catch (error) {
-        console.error('Error during fetch operation: ', error);
+    // Show a confirmation dialog
+    const isConfirmed = confirm('Are you sure you want to delete this product?');
+
+    // Proceed with deletion if the user clicked "OK"
+    if (isConfirmed) {
+        try {
+            await fetch(`https://skull-rush-88e0ddb4adf5.herokuapp.com/delete-item/${productId}`, {method: 'DELETE'});
+            loadProducts(); // Reload products after deletion
+        } catch (error) {
+            console.error('Error during fetch operation: ', error);
+        }
+    } else {
+        console.log('Deletion cancelled by user.');
     }
 }
+
 
 async function editProduct(productId) {
     const newName = prompt('Enter new product name:');
