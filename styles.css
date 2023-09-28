@@ -25,36 +25,43 @@ form {
 }
   
 .product_style {
-    width: 240px;
+    width: 180px;
     margin-bottom: 5px;
     background-color: #2c2c2c; /* darker than body background */
     color: #ffffff;
     font-size: 20px;
+    margin-left: 55px;
+    margin-top: 30px;
 }
 .quantity_style {
-    width: 110px;
+    width: 80px;
     background-color: #2c2c2c; /* darker than body background */
     color: #ffffff;
     font-size: 20px;
+    margin-left: 55px;
 }
 .price_style {
-    width: 110px;
+    width: 80px;
     background-color: #2c2c2c; /* darker than body background */
     color: #ffffff;
     font-size: 20px;
 }
 
 .pay_style {
-    width: 118px;
+    width: 87px;
     background-color: #2c2c2c; /* darker than body background */
     color: #ffffff;
     font-size: 20px;
+    margin-left: 100px;
+    margin-top: 5px;
 }
 
 .save_button {
-    margin-left: 10px;
+    margin-left: 95px;
     width: 100px;
     font-size: 20px;
+    margin-top: 10px;
+    border-radius: 20px;
 }
 
 button {
@@ -63,7 +70,6 @@ button {
     font-size: smaller;
     background-color: #2c2c2c; /* darker than body background */
     color: #ffffff;
-    border-radius: 10px;
 }
   
 table {
