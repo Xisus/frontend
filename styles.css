@@ -104,8 +104,10 @@ button {
 
 .positive {
     color: green;
+    margin-left: 65px;
 }
 
 .negative {
     color: red;
+    margin-left: 65px;
 }
