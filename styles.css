@@ -101,3 +101,11 @@ button {
 .benefit {
     margin-left: 65px;
 }
+
+.positive {
+    color: green;
+}
+
+.negative {
+    color: red;
+}

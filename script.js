@@ -92,6 +92,12 @@ function updateStats(products) {
     document.getElementById('total-stock').textContent = totalStock;
     document.getElementById('products-sold').textContent = productsSold;
     document.getElementById('total-benefit').textContent = totalBenefit.toFixed(2);  // Rounded to 2 decimal places
+
+    if (totalBenefit >= 0) {
+        benefitElement.className = 'positive';  // Apply positive class if benefit is non-negative
+    } else {
+        benefitElement.className = 'negative';  // Apply negative class if benefit is negative
+    }
 }
 
 async function deleteProduct(productId) {
