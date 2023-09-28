@@ -17,32 +17,36 @@ form {
 }
   
 .product_style {
-    width: 170px;
+    width: 240px;
     margin-bottom: 5px;
     background-color: #2c2c2c; /* darker than body background */
     color: #ffffff;
+    font-size: 20px;
 }
 .quantity_style {
-    width: 75px;
+    width: 110px;
     background-color: #2c2c2c; /* darker than body background */
     color: #ffffff;
+    font-size: 20px;
 }
 .price_style {
-    width: 75px;
+    width: 110px;
     background-color: #2c2c2c; /* darker than body background */
     color: #ffffff;
+    font-size: 20px;
 }
 
 .pay_style {
-    width: 82px;
+    width: 118px;
     background-color: #2c2c2c; /* darker than body background */
     color: #ffffff;
+    font-size: 20px;
 }
 
 .save_button {
-    margin-left: 1px;
-    width: 84px;
-    font-size: xx-small;
+    margin-left: 10px;
+    width: 100px;
+    font-size: 20px;
 }
 
 button {
