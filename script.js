@@ -4,6 +4,11 @@ async function addProduct() {
     const price = parseFloat(document.getElementById('price').value);
     const sold = document.getElementById('sold').value === "true";
 
+    if (!name || isNaN(quantity) || isNaN(price)) {
+        alert('Please fill in all required fields.');
+        return; // Exit the function if any field is empty
+    }
+
     try {
         const response = await fetch('https://skull-rush-88e0ddb4adf5.herokuapp.com/add-item', {
             method: 'POST',
