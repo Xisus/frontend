@@ -140,7 +140,7 @@ async function editProduct(productId, currentPago) {
         await fetch(`https://skull-rush-88e0ddb4adf5.herokuapp.com/edit-item/${productId}`, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ pago: newPago === 'Jesus' ? true : false }) // Adjust this line as per your server's expected format
+            body: JSON.stringify({ sold: newPago === 'Jesus' ? true : false }) // Adjust this line as per your server's expected format
         });
         loadProducts(); // Reload products after editing
     } catch (error) {
