@@ -31,16 +31,16 @@ async function loadProducts() {
             row.insertCell().textContent = product.name;
             row.insertCell().textContent = product.quantity;
             row.insertCell().textContent = product.price;
-            row.insertCell().textContent = product.sold ? "Yes" : "No";
+            row.insertCell().textContent = product.sold ? "Bizum" : "Efectivo";
 
             const actionsCell = row.insertCell();
             const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Delete';
+            deleteButton.textContent = 'Eliminar';
             deleteButton.onclick = function() { deleteProduct(product._id); };
             actionsCell.appendChild(deleteButton);
 
             const editButton = document.createElement('button');
-            editButton.textContent = 'Edit';
+            editButton.textContent = 'Editar';
             editButton.onclick = function() { editProduct(product._id); };
             actionsCell.appendChild(editButton);
         });

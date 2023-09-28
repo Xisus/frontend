@@ -1,0 +1,41 @@
+.main_structure {
+    font-family: Arial, sans-serif; 
+    max-width: fit-content;
+    margin: auto;
+    margin-top: 20px;
+  }
+  
+form {
+    margin-bottom: 20px;
+}
+  
+.product_style {
+    width: 100px;
+}
+.quantity_style {
+    width: 70px;
+}
+.price_style {
+    width: 70px;
+}
+
+input
+select,
+button {
+    margin: 5px;
+    padding: 5px;
+}
+  
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+th, td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+}
+  
+button {
+    cursor: pointer;
+}

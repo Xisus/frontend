@@ -5,28 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Product Tracker</title>
+    <title>Skull Rush</title>
 </head>
 
-<body>
+<body class="main_structure">
+    <h1>Registro de ventas</h1>
     <form id="product-form">
-        <input type="text" id="name" placeholder="Product Name" required>
-        <input type="number" id="quantity" placeholder="Quantity" required>
-        <input type="number" id="price" placeholder="Price" required>
+        <input class="product_style" type="text" id="name" placeholder="Prodcuto" required>
+        <input class="quantity_style" type="number" id="quantity" placeholder="Cantidad" required>
+        <input class="price_style" type="number" id="price" placeholder="Precio" required>
         <select id="sold" required>
-            <option value="true">Sold</option>
-            <option value="false">Not Sold</option>
+            <option value="true">Bizum</option>
+            <option value="false">Efectivo</option>
         </select>
-        <button type="button" onclick="addProduct()">Add Product</button>
+        <button type="button" onclick="addProduct()">Guardar</button>
     </form>
     <table id="product-table">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Sold</th>
-                <th>Actions</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Pago</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody></tbody>
