@@ -76,6 +76,8 @@ async function loadProducts() {
 }
 
 function updateStats(products) {
+    console.log("Products before calculation:", products);
+
     let totalStock = 72;
     let productsSold = 0;
     let totalBenefit = -347.02;
@@ -104,6 +106,9 @@ function updateStats(products) {
         euroSymbolElement.className = 'negative';  // Apply negative class to euro symbol as well
     }
 
+    console.log("Total Stock:", totalStock);
+    console.log("Products Sold:", productsSold);
+    console.log("Total Benefit:", totalBenefit);
 }
 
 async function deleteProduct(productId) {
