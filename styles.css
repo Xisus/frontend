@@ -1,6 +1,5 @@
 .main_structure {
     font-family: Arial, sans-serif; 
-    max-width: fit-content;
     margin: 20px;
     margin-top: 20px;
     background-color: #121212;
@@ -8,8 +7,17 @@
   }
 
 body {
-    background-color: #121212; /* or another dark color */
-    color: #ffffff; /* white text */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center_container {
+    width: 90%;  /* or any specific width you want */
+    max-width: 1200px;  /* or the maximum width you want */
+    margin: auto; 
 }
   
 form {
