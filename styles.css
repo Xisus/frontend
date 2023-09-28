@@ -96,6 +96,7 @@ button {
 
 .sold {
     margin-left: 65px;
+    margin-right: 65px;
 }
 
 .benefit {
@@ -109,5 +110,4 @@ button {
 
 .negative {
     color: red;
-    margin-left: 65px;
 }

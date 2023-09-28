@@ -88,16 +88,21 @@ function updateStats(products) {
         }
     });
 
-    if (totalBenefit >= 0) {
-        benefitElement.className = 'positive';  // Apply positive class if benefit is non-negative
-    } else {
-        benefitElement.className = 'negative';  // Apply negative class if benefit is negative
-    }
-    
+    const benefitElement = document.getElementById('total-benefit');
+    const euroSymbolElement = document.getElementById('euro');
+
     // Update HTML elements with calculated values
     document.getElementById('total-stock').textContent = totalStock;
     document.getElementById('products-sold').textContent = productsSold;
     document.getElementById('total-benefit').textContent = totalBenefit.toFixed(2);  // Rounded to 2 decimal places
+
+    if (totalBenefit >= 0) {
+        benefitElement.className = 'positive';  // Apply positive class if benefit is non-negative
+        euroSymbolElement.className = 'positive';  // Apply positive class to euro symbol as well
+    } else {
+        benefitElement.className = 'negative';  // Apply negative class if benefit is negative
+        euroSymbolElement.className = 'negative';  // Apply negative class to euro symbol as well
+    }
 
 }
 
