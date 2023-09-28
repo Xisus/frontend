@@ -76,8 +76,6 @@ async function loadProducts() {
 }
 
 function updateStats(products) {
-    console.log("Products before calculation:", products);
-
     let totalStock = 72;
     let productsSold = 0;
     let totalBenefit = -347.02;
@@ -105,10 +103,6 @@ function updateStats(products) {
         benefitElement.className = 'negative';  // Apply negative class if benefit is negative
         euroSymbolElement.className = 'negative';  // Apply negative class to euro symbol as well
     }
-
-    console.log("Total Stock:", totalStock);
-    console.log("Products Sold:", productsSold);
-    console.log("Total Benefit:", totalBenefit);
 }
 
 async function deleteProduct(productId) {
@@ -129,7 +123,7 @@ async function deleteProduct(productId) {
 }
 
 
-async function editProduct(productId, currentPago) {
+/*async function editProduct(productId, currentPago) {
     const isConfirmed = confirm('¿Quieres cambiar el pago?');
     if (!isConfirmed) return;
 
@@ -145,7 +139,7 @@ async function editProduct(productId, currentPago) {
     } catch (error) {
         console.error('Error during fetch operation: ', error);
     }
-}
+}*/
 
 
 
