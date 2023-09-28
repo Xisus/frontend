@@ -88,3 +88,16 @@ th, td {
 button {
     cursor: pointer;
 }
+
+
+.stock {
+    margin-left: 65px;
+}
+
+.sold {
+    margin-left: 65px;
+}
+
+.benefit {
+    margin-left: 65px;
+}

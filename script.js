@@ -69,9 +69,29 @@ async function loadProducts() {
             editButton.onclick = function() { editProduct(product._id); };
             actionsCell.appendChild(editButton);*/
         });
+        updateStats(products);
     } catch (error) {
         console.error('Error during fetch operation: ', error);
     }
+}
+
+function updateStats(products) {
+    let totalStock = 72;
+    let productsSold = 0;
+    let totalBenefit = -347.02;
+
+    products.forEach(product => {
+        totalStock -= product.quantity;  // Assuming 'quantity' represents stock
+        if (product.sold) {
+            productsSold += product.quantity;  // Count sold products
+            totalBenefit += product.price * product.quantity;  // Calculate benefit
+        }
+    });
+
+    // Update HTML elements with calculated values
+    document.getElementById('total-stock').textContent = totalStock;
+    document.getElementById('products-sold').textContent = productsSold;
+    document.getElementById('total-benefit').textContent = totalBenefit.toFixed(2);  // Rounded to 2 decimal places
 }
 
 async function deleteProduct(productId) {
