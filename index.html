@@ -10,28 +10,35 @@
 
 <body class="main_structure">
     <h1>Registro de ventas</h1>
-    <form id="product-form">
-        <input class="product_style" type="text" id="name" placeholder="Producto" required><br>
-        <input class="quantity_style" type="number" id="quantity" placeholder="Cantidad" required>
-        <input class="price_style" type="number" id="price" placeholder="Precio" required><br>
-        <select id="sold" required>
-            <option value="true">Bizum</option>
-            <option value="false">Efectivo</option>
-        </select>
-        <button type="button" onclick="addProduct()">Guardar</button>
-    </form>
-    <table id="product-table">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Pago</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+        <form id="product-form">
+            <select class="product_style"  id="name" required>
+                <option value="">Seleccione un producto</option>  
+                <option value="Black Go">Black Go</option> 
+                <option value="Black Rush Label">Black Rush Label</option> 
+                <option value="El Toro">El Toro</option>               
+            </select><br>
+            <input class="quantity_style" type="number" id="quantity" placeholder="Cantidad" required>
+            <input class="price_style" type="number" id="price" placeholder="Precio" required><br>
+            <select id="sold" required>
+                <option value="true">Bizum</option>
+                <option value="false">Efectivo</option>
+            </select>
+            <button type="button" onclick="addProduct()">Guardar</button>
+        </form>
+
+        <table id="product-table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Pago</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    
     <script src="script.js"></script>
 </body>
 

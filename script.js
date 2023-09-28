@@ -22,6 +22,23 @@ async function addProduct() {
     }
 }
 
+async function loadProductOptions() {
+    try {
+        const response = await fetch('https://your-server.com/get-product-list');
+        const products = await response.json();
+        const select = document.getElementById('name');
+        products.forEach(product => {
+            const option = document.createElement('option');
+            option.value = product.name;
+            option.textContent = product.name;
+            select.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error during fetch operation: ', error);
+    }
+}
+
+
 async function loadProducts() {
     try {
         const response = await fetch('https://skull-rush-88e0ddb4adf5.herokuapp.com/get-items');
@@ -85,6 +102,10 @@ async function editProduct(productId) {
 }
 
 // Load products on initial page load
-window.onload = loadProducts;
+window.onload = function() {
+    loadProducts();
+    loadProductOptions();
+};
+
 
   
