@@ -124,19 +124,30 @@ async function deleteProduct(productId) {
 }
 
 
-async function editProduct(productId) {
-    const newName = prompt('Enter new product name:');
+async function editProduct(productId, currentPago) {
+    // Confirm dialog to change payment method
+    const isConfirmed = confirm('¿Quieres cambiar el pago?');
+    let newPago;
+
+    // If user clicks 'OK', switch the payment method to the other option
+    if (isConfirmed) {
+        newPago = currentPago === 'Jesus' ? 'Luis' : 'Jesus'; // Toggle between 'Bizum' and 'Efectivo'
+    } else {
+        return; // Exit function without making changes if user clicks 'Cancel'
+    }
+
     try {
         await fetch(`https://skull-rush-88e0ddb4adf5.herokuapp.com/edit-item/${productId}`, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({sold: newName})
+            body: JSON.stringify({ pago: newPago === 'Jesus' ? true : false }) // Adjust this line as per your server's expected format
         });
         loadProducts(); // Reload products after editing
     } catch (error) {
         console.error('Error during fetch operation: ', error);
     }
 }
+
 
 // Load products on initial page load
 window.onload = function() {
