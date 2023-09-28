@@ -14,6 +14,9 @@ async function addProduct() {
         const result = await response.json();
         console.log(result);
         loadProducts(); // Reload products after adding a new one
+
+        document.getElementById('product-form').reset();
+
     } catch (error) {
         console.error('Error during fetch operation: ', error);
     }
