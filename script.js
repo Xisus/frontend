@@ -5,7 +5,7 @@ async function addProduct() {
     const sold = document.getElementById('sold').value === "true";
 
     if (!name || isNaN(quantity) || isNaN(price)) {
-        alert('Please fill in all required fields.');
+        alert('Porfavor no te olvides nada!');
         return; // Exit the function if any field is empty
     }
 
@@ -76,7 +76,7 @@ async function loadProducts() {
 
 async function deleteProduct(productId) {
     // Show a confirmation dialog
-    const isConfirmed = confirm('Are you sure you want to delete this product?');
+    const isConfirmed = confirm('¿Seguro que quiere eliminar?');
 
     // Proceed with deletion if the user clicked "OK"
     if (isConfirmed) {

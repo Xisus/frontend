@@ -25,7 +25,7 @@ form {
 }
   
 .product_style {
-    width: 200px;
+    width: 210px;
     margin-bottom: 5px;
     background-color: #2c2c2c; /* darker than body background */
     color: #ffffff;
@@ -59,7 +59,7 @@ form {
 }
 
 .save_button {
-    margin-left: 95px;
+    margin-left: 100px;
     width: 100px;
     font-size: 20px;
     margin-top: 10px;
