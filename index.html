@@ -17,8 +17,8 @@
                 <option value="Black Rush Label">Black Rush Label</option> 
                 <option value="El Toro">El Toro</option>               
             </select><br>
-            <input class="quantity_style" type="number" id="quantity" placeholder="Cantidad" required>
-            <input class="price_style" type="number" id="price" placeholder="Precio" required><br>
+            <input class="quantity_style" type="number" id="quantity" placeholder="Cantidad" required pattern="\d*" inputmode="numeric">
+            <input class="price_style" type="number" id="price" placeholder="Precio" required pattern="\d*|[0-9]+(\.[0-9]{1,2})?" inputmode="decimal"><br>
             <select class="pay_style" id="sold" required>
                 <option value="true">Bizum</option>
                 <option value="false">Efectivo</option>
