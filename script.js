@@ -88,7 +88,7 @@ function updateStats(products) {
 
     products.forEach(product => {
         totalStock -= product.quantity;  // Assuming 'quantity' represents stock
-        if (product.sold) {
+        if (product.price) {
             productsSold += product.quantity;  // Count sold products
             totalBenefit += product.price * product.quantity;  // Calculate benefit
         }
