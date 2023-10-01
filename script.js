@@ -2,7 +2,6 @@ async function addProduct() {
     const name = document.getElementById('name').value;
     const quantity = parseInt(document.getElementById('quantity').value);
     const price = parseFloat(document.getElementById('price').value);
-    const sold = document.getElementById('sold').value === "true";
 
     if (!name || isNaN(quantity) || isNaN(price)) {
         alert('Porfavor no te olvides nada!');
@@ -13,7 +12,7 @@ async function addProduct() {
         const response = await fetch('https://skull-rush-88e0ddb4adf5.herokuapp.com/add-item', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ name, quantity, price, sold })
+            body: JSON.stringify({ name, quantity, price })
         });
 
         const result = await response.json();
@@ -56,19 +55,26 @@ async function loadProducts() {
             row.insertCell().textContent = product.name;
             row.insertCell().textContent = product.quantity;
             row.insertCell().textContent = product.price;
-            row.insertCell().textContent = product.sold ? "Jesus" : "Luis";
 
             const actionsCell = row.insertCell();
             const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'X';
+            deleteButton.textContent = 'Eliminar';
             deleteButton.onclick = function() { deleteProduct(product._id); };
             actionsCell.appendChild(deleteButton);
 
-            const editButton = document.createElement('button');
+            const checkboxCell = row.insertCell();
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox'; // Set type to checkbox
+            checkbox.className = 'row-checkbox'; // Set class name for styling or selecting
+            checkbox.value = product.id; // Set value to product id or other identifier
+            checkboxCell.appendChild(checkbox);
+
+            /*const editButton = document.createElement('button');
             editButton.textContent = 'Editar';
             editButton.onclick = function() { editProduct(product._id, product.sold ? 'Jesus' : 'Luis'); };
-            actionsCell.appendChild(editButton);
+            actionsCell.appendChild(editButton);*/
         });
+        addCheckboxListeners();
         updateStats(products);
     } catch (error) {
         console.error('Error during fetch operation: ', error);
@@ -121,6 +127,28 @@ async function deleteProduct(productId) {
         console.log('Deletion cancelled by user.');
     }
 }
+
+function addCheckboxListeners() {
+    document.querySelectorAll('.row-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const isConfirmed = confirm('Seguro que quieres modificar el Pago?');
+            if (isConfirmed) {
+                const productId = this.value;
+                if (this.checked) {
+                    // Handle checkbox being checked, if necessary
+                    console.log(`Checkbox for product ${productId} is checked.`);
+                } else {
+                    // Handle checkbox being unchecked, if necessary
+                    console.log(`Checkbox for product ${productId} is unchecked.`);
+                }
+            } else {
+                // If the user cancels the action, revert the checkbox state
+                this.checked = !this.checked;
+            }
+        });
+    });
+}
+
 
 
 /*async function editProduct(productId, currentPago) {

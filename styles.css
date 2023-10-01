@@ -110,3 +110,22 @@ button {
 .negative {
     color: red;
 }
+
+
+/* Centering Text in Table Cells */
+#product-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Centering Buttons in Table Cells */
+#product-table button {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Centering Checkboxes in Table Cells */
+#product-table input[type="checkbox"] {
+    display: block;
+    margin: 0 auto;
+}
