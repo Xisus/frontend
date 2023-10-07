@@ -149,6 +149,32 @@ function addCheckboxListeners() {
     });
 }
 
+checkbox.addEventListener('change', function() {
+    const isConfirmed = confirm('Are you sure you want to change the status of this item?');
+    if (isConfirmed) {
+        const productId = this.value;
+        const isChecked = this.checked;
+        
+        // Call a function to update checkbox state in the database
+        updateCheckboxStateInDatabase(productId, isChecked);
+    } else {
+        // Revert checkbox state if user cancels action
+        this.checked = !this.checked;
+    }
+});
+
+function updateCheckboxStateInDatabase(productId, isChecked) {
+    fetch(`https://skull-rush-88e0ddb4adf5.herokuapp.com/delete-item/update-checkbox-state`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ productId, isChecked })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+}
 
 
 /*async function editProduct(productId, currentPago) {
