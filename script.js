@@ -136,7 +136,7 @@ function addCheckboxListeners() {
                 const productId = this.value;
                 const isChecked = this.checked;
 
-                updateCheckboxStateInDatabase(productId, isChecked);
+                updateCheckboxState(productId, isChecked);
                 if (this.checked) {
                     // Handle checkbox being checked, if necessary
                     console.log(`Checkbox for product ${productId} is checked.`);
