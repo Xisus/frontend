@@ -154,27 +154,34 @@ function addCheckboxListeners() {
 
 
 async function updateCheckboxStateInDatabase(productId, isChecked) {
-    await fetch(`https://skull-rush-88e0ddb4adf5.herokuapp.com/delete-item/update-checkbox-state`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ productId, isChecked })
-    })
-    .then(response => {
-        // Check if the response has a JSON content type
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.indexOf('application/json') !== -1) {
-            // Parse the JSON from the response
-            return response.json();
-        } else {
-            // If not JSON, throw an error with the status text
+    try {
+        const response = await fetch('https://skull-rush-88e0ddb4adf5.herokuapp.com/update-checkbox-state', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ productId, isChecked })
+        });
+
+        if (!response.ok) {
+            // If response is not ok, log the response text for debugging purposes
+            const text = await response.text();
+            console.error('Server Response:', text);
             throw new Error(response.statusText);
         }
-    })
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
+
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.indexOf('application/json') !== -1) {
+            const data = await response.json();
+            console.log(data);
+        } else {
+            throw new Error('Invalid content type received, expected JSON');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
+
 
 
 /*async function editProduct(productId, currentPago) {
