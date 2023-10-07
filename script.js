@@ -153,34 +153,26 @@ function addCheckboxListeners() {
 }
 
 
-async function updateCheckboxStateInDatabase(productId, isChecked) {
-    try {
-        const response = await fetch('https://skull-rush-88e0ddb4adf5.herokuapp.com/update-checkbox-state', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ productId, isChecked })
-        });
+function updateCheckboxState(productId, isChecked) {
+    // Log the values being sent to ensure they're correct
+    console.log('Updating checkbox state:', productId, isChecked);
 
-        if (!response.ok) {
-            // If response is not ok, log the response text for debugging purposes
-            const text = await response.text();
-            console.error('Server Response:', text);
-            throw new Error(response.statusText);
+    fetch('https://your-server-address/update-checkbox-state', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId, isChecked })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Log the server response for debugging
+        if (!data.success) {
+            // Handle the error on client side if the server responds with success: false
+            console.error('Failed to update checkbox state:', data.message);
         }
-
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.indexOf('application/json') !== -1) {
-            const data = await response.json();
-            console.log(data);
-        } else {
-            throw new Error('Invalid content type received, expected JSON');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
+    })
+    .catch(err => console.error('Error sending request:', err));
 }
+
 
 
 
