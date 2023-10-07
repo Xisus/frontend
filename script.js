@@ -134,6 +134,9 @@ function addCheckboxListeners() {
             const isConfirmed = confirm('Seguro que quieres modificar el Pago?');
             if (isConfirmed) {
                 const productId = this.value;
+                const isChecked = this.checked;
+
+                updateCheckboxStateInDatabase(productId, isChecked);
                 if (this.checked) {
                     // Handle checkbox being checked, if necessary
                     console.log(`Checkbox for product ${productId} is checked.`);
@@ -149,19 +152,6 @@ function addCheckboxListeners() {
     });
 }
 
-checkbox.addEventListener('change', function() {
-    const isConfirmed = confirm('Are you sure you want to change the status of this item?');
-    if (isConfirmed) {
-        const productId = this.value;
-        const isChecked = this.checked;
-        
-        // Call a function to update checkbox state in the database
-        updateCheckboxStateInDatabase(productId, isChecked);
-    } else {
-        // Revert checkbox state if user cancels action
-        this.checked = !this.checked;
-    }
-});
 
 function updateCheckboxStateInDatabase(productId, isChecked) {
     fetch(`https://skull-rush-88e0ddb4adf5.herokuapp.com/delete-item/update-checkbox-state`, {
