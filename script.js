@@ -153,15 +153,25 @@ function addCheckboxListeners() {
 }
 
 
-function updateCheckboxStateInDatabase(productId, isChecked) {
-    fetch(`https://skull-rush-88e0ddb4adf5.herokuapp.com/delete-item/update-checkbox-state`, {
+async function updateCheckboxStateInDatabase(productId, isChecked) {
+    await fetch(`https://skull-rush-88e0ddb4adf5.herokuapp.com/delete-item/update-checkbox-state`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ productId, isChecked })
     })
-    .then(response => response.json())
+    .then(response => {
+        // Check if the response has a JSON content type
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.indexOf('application/json') !== -1) {
+            // Parse the JSON from the response
+            return response.json();
+        } else {
+            // If not JSON, throw an error with the status text
+            throw new Error(response.statusText);
+        }
+    })
     .then(data => console.log(data))
     .catch(error => console.error('Error:', error));
 }
